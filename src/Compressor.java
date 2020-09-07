@@ -9,6 +9,9 @@ public class Compressor {
         System.out.println(compress("aaabb"));
         System.out.println(compress("abcd"));
         System.out.println(compress("abbcccccccddaaaad"));
+        System.out.println(compress("abbc"));
+        System.out.println(compress2("abbcccccccddaaaad"));
+        System.out.println(compress2("abbc"));
     }
 
     public static String compress(String str) {
@@ -31,13 +34,32 @@ public class Compressor {
                     break;
                 }
             }
-            if (letterCounter > 1) {
+            if (letterCounter > 0) {
                 i += letterCounter;
                 result.append(letterCounter);
             } else {
                 i++;
             }
         }
+        if (result.toString().length() >= str.length()) {
+            return str;
+        }
         return result.toString();
+    }
+
+    public static String compress2(String str) {
+        StringBuilder compressed = new StringBuilder();
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            count++;
+
+            // If next char different, append this result
+            if (i + 1 >= str.length() || str.charAt(i) != str.charAt(i + 1)) {
+                compressed.append(str.charAt(i));
+                compressed.append(count);
+                count = 0;
+            }
+        }
+        return compressed.length() < str.length() ? compressed.toString() : str;
     }
 }

@@ -7,6 +7,8 @@
 public class Compressor {
     public static void main(String[] args) {
         System.out.println(compress("aaabb"));
+        System.out.println(compress("abcd"));
+        System.out.println(compress("abbcccccccddaaaad"));
     }
 
     public static String compress(String str) {
@@ -29,7 +31,7 @@ public class Compressor {
                     break;
                 }
             }
-            if (letterCounter > 0) {
+            if (letterCounter > 1) {
                 i += letterCounter;
                 result.append(letterCounter);
             } else {

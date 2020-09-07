@@ -18,6 +18,7 @@ public class OneAway {
         System.out.println(oneAway("pale", "aale"));
         System.out.println(oneAway("pale", "lape"));
         System.out.println(oneAway("ABCD", "BCDAG"));
+        System.out.println(oneAway("ABCD", "ABDC"));
     }
 
     static boolean oneAway(String input, String output) {

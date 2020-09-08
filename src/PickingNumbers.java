@@ -8,11 +8,11 @@ import java.util.Map;
 public class PickingNumbers {
 
     public static void main(String[] args) {
-        int[] array = {4, 6, 5, 3, 3, 1};
+        int[] array = {9,9,9,9,9,9,9, 1, 1, 2, 2, 3, 1, 2, 4,4,4,4,5,5,5,5,5,5,5,8,8,8,8,8};
 
         int[] result = numberPicker(array);
 
-        for (int i=0; i< result.length; i++) {
+        for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);
         }
     }
@@ -21,22 +21,26 @@ public class PickingNumbers {
         final HashMap<Integer, Integer> hashMap = new HashMap<>();
         for (int i = 0; i < input.length; i++) {
             int count = hashMap.getOrDefault(input[i], 0);
-            hashMap.put(i, ++count);
+            hashMap.put(input[i], ++count);
         }
-        int prevValue = -1;
         int maxValue = -1;
         int maxKey = -1;
 
         Iterator<Map.Entry<Integer, Integer>> iterator = hashMap.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<Integer, Integer> entry = iterator.next();
-            if (prevValue == -1) {
-                prevValue = entry.getValue();
+            if (maxValue == -1) {
                 maxValue = entry.getValue();
                 maxKey = entry.getKey();
-            } else if (prevValue + entry.getValue() > maxValue) {
-                maxValue = prevValue + entry.getValue();
-                maxKey = entry.getKey();
+            } else {
+                int currentKey = entry.getKey();
+                int currentValue = entry.getValue();
+
+                int sum = currentValue + hashMap.getOrDefault(currentKey - 1, 0);
+                if (sum > maxValue) {
+                    maxValue = sum;
+                    maxKey = currentKey;
+                }
             }
         }
 
@@ -49,11 +53,11 @@ public class PickingNumbers {
         int totalSize = firstCounter + secondCounter;
         int[] result = new int[totalSize];
 
-        for (int i=0; i< firstCounter; i++) {
+        for (int i = 0; i < firstCounter; i++) {
             result[i] = firstValue;
         }
 
-        for (int i=firstCounter; i< totalSize; i++) {
+        for (int i = firstCounter; i < totalSize; i++) {
             result[i] = secondValue;
         }
 

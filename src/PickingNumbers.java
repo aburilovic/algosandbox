@@ -33,17 +33,13 @@ public class PickingNumbers {
                 maxValue = entry.getValue();
                 maxKey = entry.getKey();
             } else {
-                int currentKey = entry.getKey();
-                int currentValue = entry.getValue();
-
-                int sum = currentValue + hashMap.getOrDefault(currentKey - 1, 0);
+                int sum = entry.getValue() + hashMap.getOrDefault(entry.getKey() - 1, 0);
                 if (sum > maxValue) {
                     maxValue = sum;
-                    maxKey = currentKey;
+                    maxKey = entry.getKey();
                 }
             }
         }
-
 
         int firstValue = maxKey;
         int firstCounter = hashMap.getOrDefault(firstValue, 0);

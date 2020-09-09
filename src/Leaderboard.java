@@ -19,9 +19,13 @@ public class Leaderboard {
 
         @Override
         public int compareTo(Object o) {
-            int diff = ((Score) o).score - this.score;
-            if (diff == 0 && this.isAlice) {
-                return -1;
+            int firstScore = ((Score) o).score;
+            int diff = firstScore - this.score;
+            if (diff == 0) {
+                boolean secondIsAlice = ((Score)o).isAlice;
+                if (this.isAlice && !secondIsAlice) {
+                    return -1;
+                }
             }
             return diff;
         }
